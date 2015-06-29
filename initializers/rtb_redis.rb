@@ -6,7 +6,7 @@ require 'redis'
 require 'redis/distributed'
 module RtbRedis
   def self.connect
-    conf = YAML.load(File.read(File.expand_path("../../../config/rtb_redis.yml", __FILE__)))
+    conf = YAML.load(File.read(File.expand_path("../../config/rtb_redis.yml", __FILE__)))
     @@expense_node = Redis::Distributed.new(conf["expense"]["urls"], 
       :password => conf["expense"]["password"],  :timeout => 0.5 , :reconnect => true)
     @@frequency_node = Redis.new(:host => conf["frequency"]["host"],
@@ -22,5 +22,6 @@ module RtbRedis
     @@frequency_node
   end
 end
+
 
 RtbRedis.connect
