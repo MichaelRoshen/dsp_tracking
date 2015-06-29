@@ -2,12 +2,12 @@ class RedisKeys
 	def initialize(options)
 		@user_id = options[:hqClientId]
 		@group_id = options[:hqGroupId]
-		@ad_id = options[:hqGroupId]
+		@ad_id = options[:hqAdId]
 		@creative_id = options[:hqCreativeId]
 		@refer_url = options[:hqRefer]
 		@ad_time = options[:hqTime]
 		@event = options[:hqEvent]
-		@price = options[:hqGroupId]
+		@price = options[:hqPrice]
 		@source = options[:hqSource]
 		@uid = options[:hquid]
 	end
