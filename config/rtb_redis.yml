@@ -1,42 +1,10 @@
-#HK
 expense:
   urls:
-    - redis://127.0.0.1:6379
-  # - redis://satsuki6.adxhk.iclick:63790
-  # - redis://satsuki6.adxhk.iclick:63791
-  # - redis://satsuki7.adxhk.iclick:63790
-  # - redis://satsuki7.adxhk.iclick:63791
-  # - redis://mei6.adxhk.iclick:63790
-  # - redis://mei6.adxhk.iclick:63791
-  # - redis://mei7.adxhk.iclick:63790
-  # - redis://mei7.adxhk.iclick:63791
-  # - redis://sheeta6.adxhk.iclick:63790
-  # - redis://sheeta6.adxhk.iclick:63791
-  # - redis://sheeta7.adxhk.iclick:63790
-  # - redis://sheeta7.adxhk.iclick:63791
-  # - redis://kiki6.adxhk.iclick:63790
-  # - redis://kiki6.adxhk.iclick:63791
-  # - redis://kiki7.adxhk.iclick:63790
-  # - redis://kiki7.adxhk.iclick:63791
-  # - redis://shizuku6.adxhk.iclick:63790
-  # - redis://shizuku6.adxhk.iclick:63791
-  # - redis://shizuku7.adxhk.iclick:63790
-  # - redis://shizuku7.adxhk.iclick:63791
-  # password: adxredispassword
+    - redis://10.137.192.138:6379
+  password: 
 frequency:
-  host: 127.0.0.1
+  host: 10.137.192.138 
   port: 6379
   password:
-#BJ
-expense:
-  urls:
-    - redis://127.0.0.1:6379
-  # - redis://10.10.10.185:63790/1
-  # - redis://10.10.10.186:63790/1
-  # - redis://10.10.10.187:63790/1
-  # - redis://10.10.10.188:63790/1
-  # password: adsvanaredispassword
-#frequency:
-#  url: redis://127.0.0.1:6379
 
 

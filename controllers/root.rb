@@ -1,11 +1,16 @@
 
 
-get '/' do
+get '/hello' do
+	"hello, wrold"
+end
+
+get '/api/ads' do
 	options = params.symbolize_keys
 	keys = RedisKeys.new(options)
 	if options[:hqEvent]  == "1" #曝光
 		ShowTracking << options
-  		RtbRedis.expense_node.incr(keys.delivery_current_count_show)
+		puts RtbRedis
+		RtbRedis.expense_node.incr(keys.delivery_current_count_show)
 	else #点击
 		des_url = options[:hqRefer].to_s
 		if des_url	

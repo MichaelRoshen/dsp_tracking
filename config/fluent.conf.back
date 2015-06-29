@@ -1,0 +1,32 @@
+<source>
+  type forward
+  port 24224
+</source>
+<match dsp.show>
+  type file
+  format hash
+  path /home/dsp_tracking/logs/access_show_log
+  time_slice_format %Y%m%d
+  time_slice_wait 10m
+  compress gzip
+</match>
+
+
+<match dsp.click>
+  type file
+  format hash
+  path /home/dsp_tracking/logs/access_click_log
+  time_slice_format %Y%m%d
+  time_slice_wait 10m
+  compress gzip
+</match>
+
+
+<match dsp.error>
+  type file
+  format hash
+  path /home/dsp_tracking/logs/error_log
+  time_slice_format %Y%m%d
+  time_slice_wait 10m
+  compress gzip
+</match>
