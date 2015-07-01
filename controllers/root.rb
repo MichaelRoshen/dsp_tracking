@@ -6,18 +6,16 @@ end
 
 get '/api/ads' do
 	options = params.symbolize_keys
-	keys = RedisKeys.new(options)
-	if options[:hqEvent]  == "1" #曝光
+	if options[:hqEvent].to_s  == "1" #曝光
 		ShowTracking << options
-	#	RtbRedis.expense_node.incr(keys.delivery_current_count_show)
-	elsif options[:hqEvent] == '2' #点击
-		des_url = options[:hqRefer].to_s
-		if des_url	
-		   ClickTracking << options
-	#          RtbRedis.expense_node.incr(keys.delivery_current_count_click)
-		   redirect des_url	
-		end
+	elsif options[:hqEvent].to_s == '2' #点击
+		ClickTracking << options
 	else
+	end
+
+	des_url = options[:hqURL].to_s
+	if des_url != ""	
+	   redirect des_url, 302	
 	end
 end
 
