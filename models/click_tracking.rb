@@ -1,5 +1,5 @@
 class ClickTracking
   include Dsp::Fluent
 
-  label_as "dsp.click"
+  label_as "tracking.ad.click"
 end

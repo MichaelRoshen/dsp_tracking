@@ -1,7 +1,7 @@
 
 
 get '/hello' do
-	"hello, wrold102"
+	"hello, wrold118"
 end
 
 get '/api/ads' do

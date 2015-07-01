@@ -1,5 +1,5 @@
 class ShowTracking
   include Dsp::Fluent
 
-  label_as "dsp.show"
+  label_as "tracking.ad.show"
 end
