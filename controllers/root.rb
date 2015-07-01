@@ -1,7 +1,7 @@
 
 
 get '/hello' do
-	"hello, wrold"
+	"hello, wrold102"
 end
 
 get '/api/ads' do
@@ -9,19 +9,15 @@ get '/api/ads' do
 	keys = RedisKeys.new(options)
 	if options[:hqEvent]  == "1" #曝光
 		ShowTracking << options
-		puts RtbRedis
-		RtbRedis.expense_node.incr(keys.delivery_current_count_show)
-	else #点击
+	#	RtbRedis.expense_node.incr(keys.delivery_current_count_show)
+	elsif options[:hqEvent] == '2' #点击
 		des_url = options[:hqRefer].to_s
 		if des_url	
-			begin
-				ClickTracking << options
-		  		RtbRedis.expense_node.incr(keys.delivery_current_count_click)
-				redirect des_url	
-			rescue Exception => e
-				ErrorTracking << options.merge({:e => e})
-			end
+		   ClickTracking << options
+	#          RtbRedis.expense_node.incr(keys.delivery_current_count_click)
+		   redirect des_url	
 		end
+	else
 	end
 end
 
