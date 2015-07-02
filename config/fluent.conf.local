@@ -1,0 +1,31 @@
+<source>
+  @type forward
+  @id forward_input
+</source>
+
+<source>
+  @type http
+  @id http_input
+  port 8888
+</source>
+
+
+# host 10.254.212.149
+# port 50070
+<match tracking.*.*>
+  type file
+  path /opt/log/tracking/show.log
+  buffer_chunk_limit 100m
+  compress gzip
+</match>
+
+#<match tracking.*.*>
+#  type forward
+#  localtime
+#  <server>
+#    host 10.254.212.149
+#    port 24224
+#  </server>
+#  flush_interval 1s
+#</match>
+
