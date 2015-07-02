@@ -10,6 +10,16 @@ get '/api/ads' do
 		ShowTracking << options
 	elsif options[:hqEvent].to_s == '2' #点击
 		ClickTracking << options
+	elsif options[:hqEvent].to_s == '3' #竞价胜利
+		BidderTracking << options
+	elsif options[:hqEvent].to_s == '4' #下载
+		DownloadTracking << options
+	elsif options[:hqEvent].to_s == '5' #关注
+		FollowTracking << options
+	elsif options[:hqEvent].to_s == '6' #安装
+		InstallationTracking << options
+	elsif options[:hqEvent].to_s == '7' #激活
+		ActiveTracking << options
 	else
 	end
 
