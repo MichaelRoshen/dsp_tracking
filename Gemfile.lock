@@ -51,6 +51,7 @@ GEM
       sinatra (~> 1.4.0)
       tilt (>= 1.3, < 3)
     slop (3.6.0)
+    sqlite3 (1.3.10)
     string-scrub (0.0.5)
     thread_safe (0.3.5)
     tilt (2.0.1)
@@ -74,4 +75,8 @@ DEPENDENCIES
   sinatra
   sinatra-activerecord
   sinatra-contrib
+  sqlite3
   uuidtools
+
+BUNDLED WITH
+   1.10.5
