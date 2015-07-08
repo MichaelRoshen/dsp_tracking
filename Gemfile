@@ -2,6 +2,8 @@ source "http://rubygems.org"
 
 
 gem 'sinatra'
+gem 'activerecord'
+gem 'sinatra-activerecord'
 gem 'activesupport', '3.2.18'
 gem 'uuidtools'
 gem 'redis'
