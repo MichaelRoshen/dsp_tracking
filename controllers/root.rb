@@ -28,21 +28,21 @@ get '/api/ads' do
 	    keys = ["id", "budget_price", "cycle_delivery_price", "ad_current_cost", "ad_cost", "delivery_time_limit", "delivery_price", "delivery_start_time", "delivery_end_time", "ad_group_budget_price", "ad_group_current_cost", "account_buget_price", "account_current_cost"] 
 		redis_info =  RtbRedis.expense_node.mapped_hmget(rtb_key, *keys)
 		redis_info = redis_info.symbolize_keys
-		actual_price = options[:hqPrice].to_f
+		actual_price = options[:hqPrice].to_i
 
 		#账号花费
-		redis_info[:account_current_cost] = redis_info[:account_current_cost].to_f + actual_price
+		redis_info[:account_current_cost] = redis_info[:account_current_cost].to_i + actual_price
 		#广告组花费
-		redis_info[:ad_group_current_cost] = redis_info[:ad_group_current_cost].to_f + actual_price
+		redis_info[:ad_group_current_cost] = redis_info[:ad_group_current_cost].to_i + actual_price
 		#广告当前周期花费
-		redis_info[:ad_current_cost] = redis_info[:ad_current_cost].to_f + actual_price
+		redis_info[:ad_current_cost] = redis_info[:ad_current_cost].to_i + actual_price
 		#广告总花费
-		redis_info[:ad_cost] = redis_info[:ad_cost].to_f + actual_price
+		redis_info[:ad_cost] = redis_info[:ad_cost].to_i + actual_price
 		#更新广告花费
 		RtbRedis.expense_node.mapped_hmset(rtb_key, redis_info)
 
 		#实际花费＋固定出价 超出15分钟的预算，则从可投放数组种删除该条广告，并存入不可投递数组种，等待定时任务重新计算
-		if redis_info[:ad_current_cost].to_f + redis_info[:delivery_price].to_f > redis_info[:cycle_delivery_price].to_f
+		if redis_info[:ad_current_cost].to_i + redis_info[:delivery_price].to_i > redis_info[:cycle_delivery_price].to_i
 			#删除可投地数组中的id
 			budget_key = "budget_control"
 			RtbRedis.expense_node.srem(budget_key, params[:hqAdId].to_i)

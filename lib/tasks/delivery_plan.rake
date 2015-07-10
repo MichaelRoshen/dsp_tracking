@@ -15,10 +15,11 @@
 		redis_info =  RtbRedis.expense_node.mapped_hmget(rtb_key, *keys)
 		redis_info = redis_info.symbolize_keys
 		puts redis_info
-      	if redis_info[:budget_price].to_f - redis_info[:ad_cost].to_f > redis_info[:cycle_delivery_price].to_f &&
-      		redis_info[:ad_group_budget_price].to_f - redis_info[:ad_group_cost].to_f > redis_info[:cycle_delivery_price].to_f &&
-      		redis_info[:account_buget_price].to_f - redis_info[:account_cost].to_f > redis_info[:cycle_delivery_price].to_f &&
+      	if redis_info[:budget_price].to_i - redis_info[:ad_cost].to_i > redis_info[:cycle_delivery_price].to_i &&
+      		redis_info[:ad_group_budget_price].to_i - redis_info[:ad_group_cost].to_i > redis_info[:cycle_delivery_price].to_i &&
+      		redis_info[:account_buget_price].to_i - redis_info[:account_cost].to_i > redis_info[:cycle_delivery_price].to_i &&
       		Time.now < Time.parse(redis_info[:delivery_end_time].to_s) 
+      		puts "delivery agin...."
       		redis_info[:ad_current_cost] = 0.0
       		budget_key = "budget_control"
 			RtbRedis.expense_node.mapped_hmset(rtb_key, redis_info)
@@ -26,7 +27,6 @@
 			RtbRedis.expense_node.srem(no_budget_key, redis_info[:id])
       	end
       end
-      puts "done...#{Time.now}"
    end   
 
    desc 'redis seed'
