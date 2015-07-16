@@ -6,8 +6,13 @@ end
 
 get '/api/ads' do
 	options = params.symbolize_keys
-	wp = options[:hqPrice].to_s
-	price = decode_aes_price(wp)
+	if options[:hqSource].to_s == 'youku'
+		wp = options[:hqPrice].to_s
+		price = decode_aes_price(wp)
+		options = options.merge({:hqPrice => price})
+	elsif options[:hqSource].to_s == 'baidu_bc'
+	end
+	
 	if options[:hqEvent].to_s  == "1" #曝光
 		ShowTracking << options
 	elsif options[:hqEvent].to_s == '2' #点击
@@ -53,8 +58,6 @@ get '/api/ads' do
 			RtbRedis.expense_node.sadd(no_budget_key, params[:hqAdId].to_i)
 		end
 	end
-
-
 	des_url = options[:hqURL].to_s
 	if des_url != ""	
 	   redirect des_url, 302	
