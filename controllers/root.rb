@@ -9,10 +9,10 @@ get '/api/ads' do
 	if options[:hqSource].to_s == 'youku'
 		wp = options[:hqPrice].to_s
 		price = decode_aes_price(wp)
-		options = options.merge({:hqPrice => price})
+		options = options.merge({:decodePrice => price})
 	elsif options[:hqSource].to_s == 'baidu_bc'
 	end
-	
+
 	if options[:hqEvent].to_s  == "1" #曝光
 		ShowTracking << options
 	elsif options[:hqEvent].to_s == '2' #点击
