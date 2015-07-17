@@ -35,8 +35,7 @@ get '/api/ads' do
 	    keys = ["id", "budget_price", "cycle_delivery_price", "ad_current_cost", "ad_cost", "delivery_time_limit", "delivery_price", "delivery_start_time", "delivery_end_time", "ad_group_budget_price", "ad_group_current_cost", "account_buget_price", "account_current_cost"] 
 		redis_info =  RtbRedis.expense_node.mapped_hmget(rtb_key, *keys)
 		redis_info = redis_info.symbolize_keys
-		actual_price = options[:hqPrice].to_i
-
+		actual_price = actual_price(options)
 		#账号花费
 		redis_info[:account_current_cost] = redis_info[:account_current_cost].to_i + actual_price
 		#广告组花费
@@ -65,6 +64,15 @@ get '/api/ads' do
 end
 
 private
+
+def actual_price(options)
+	if options[:hqSource] == 'youku'
+		options[:decodePrice].to_i
+	else
+		options[:hqPrice].to_i
+	end
+end
+
 
 def decode_aes_price(wp)
 	price = Rtb::Aes::DecodePrice.decode_price(wp)
