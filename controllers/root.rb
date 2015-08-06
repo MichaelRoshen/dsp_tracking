@@ -37,9 +37,9 @@ get '/api/ads' do
 		redis_info = redis_info.symbolize_keys
 		actual_price = actual_price(options)
 		#账号花费
-		redis_info[:account_current_cost] = redis_info[:account_current_cost].to_i + actual_price
+		redis_info[:account_cost] = redis_info[:account_cost].to_i + actual_price
 		#广告组花费
-		redis_info[:ad_group_current_cost] = redis_info[:ad_group_current_cost].to_i + actual_price
+		redis_info[:ad_group_cost] = redis_info[:ad_group_cost].to_i + actual_price
 		#广告当前周期花费
 		redis_info[:ad_current_cost] = redis_info[:ad_current_cost].to_i + actual_price
 		#广告总花费

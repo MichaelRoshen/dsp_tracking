@@ -1,9 +1,9 @@
 expense:
   urls:
-    - redis://10.137.192.138:6379
+    - redis://10.254.213.144:6379
   password: 
 frequency:
-  host: 10.137.192.138 
+  host: 10.254.213.144
   port: 6379
   password:
 
