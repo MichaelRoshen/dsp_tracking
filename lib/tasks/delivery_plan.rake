@@ -11,7 +11,7 @@
       RtbRedis.expense_node.smembers(no_budget_key).uniq.map{|item|item.to_i}.each do |ad|
       	puts ad
       	rtb_key = "ad_#{ad.to_i}_delivery_strategy"
-	    keys = ["id", "budget_price", "cycle_delivery_price", "ad_current_cost", "ad_cost", "delivery_time_limit", "delivery_price", "delivery_start_time", "delivery_end_time", "ad_group_budget_price", "ad_group_current_cost", "account_buget_price", "account_current_cost"] 
+	    keys = ["id", "budget_price", "cycle_delivery_price", "ad_current_cost", "ad_cost", "delivery_time_limit", "delivery_price", "delivery_start_time", "delivery_end_time", "ad_group_budget_price", "ad_group_cost", "account_buget_price", "account_cost"] 
 		redis_info =  RtbRedis.expense_node.mapped_hmget(rtb_key, *keys)
 		redis_info = redis_info.symbolize_keys
 		puts redis_info

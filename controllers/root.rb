@@ -32,7 +32,7 @@ get '/api/ads' do
 
 	if options[:hqEvent].to_s == '3' #竞价胜利
 	    rtb_key = "ad_#{params[:hqAdId]}_delivery_strategy"
-	    keys = ["id", "budget_price", "cycle_delivery_price", "ad_current_cost", "ad_cost", "delivery_time_limit", "delivery_price", "delivery_start_time", "delivery_end_time", "ad_group_budget_price", "ad_group_current_cost", "account_buget_price", "account_current_cost"] 
+	    keys = ["id", "budget_price", "cycle_delivery_price", "ad_current_cost", "ad_cost", "delivery_time_limit", "delivery_price", "delivery_start_time", "delivery_end_time", "ad_group_budget_price", "ad_group_cost", "account_buget_price", "account_cost"]
 		redis_info =  RtbRedis.expense_node.mapped_hmget(rtb_key, *keys)
 		redis_info = redis_info.symbolize_keys
 		actual_price = actual_price(options)
