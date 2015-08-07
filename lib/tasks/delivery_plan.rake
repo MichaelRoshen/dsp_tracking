@@ -18,7 +18,7 @@
       	if redis_info[:budget_price].to_f - redis_info[:ad_cost].to_f > redis_info[:cycle_delivery_price].to_f &&
       		redis_info[:ad_group_budget_price].to_f - redis_info[:ad_group_cost].to_f > redis_info[:cycle_delivery_price].to_f &&
       		redis_info[:account_buget_price].to_f - redis_info[:account_cost].to_f > redis_info[:cycle_delivery_price].to_f &&
-      		Time.at(redis_info[:delivery_start_time].to_i) < Time.now < Time.at(redis_info[:delivery_end_time].to_i) 
+      		Time.at(redis_info[:delivery_start_time].to_i) < Time.now && Time.now < Time.at(redis_info[:delivery_end_time].to_i) 
       		puts "delivery agin...."
       		redis_info[:ad_current_cost] = 0.0
       		budget_key = "budget_control"
