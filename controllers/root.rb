@@ -35,16 +35,16 @@ get '/api/ads' do
 	    keys = ["id", "budget_price", "cycle_delivery_price", "ad_current_cost", "ad_cost", "delivery_time_limit", "delivery_price", "delivery_start_time", "delivery_end_time", "ad_group_budget_price", "ad_group_cost", "account_buget_price", "account_cost"]
 		redis_info =  RtbRedis.expense_node.mapped_hmget(rtb_key, *keys)
 		redis_info = redis_info.symbolize_keys
-		actual_price = actual_price(options)
-		actual_price = actual_price.to_f / 1000
+		tactual_price = actual_price(options)
+		tactual_price = tactual_price.to_f / 1000
 		#账号花费
-		redis_info[:account_cost] = redis_info[:account_cost].to_f + actual_price
+		redis_info[:account_cost] = redis_info[:account_cost].to_f + tactual_price
 		#广告组花费
-		redis_info[:ad_group_cost] = redis_info[:ad_group_cost].to_f + actual_price
+		redis_info[:ad_group_cost] = redis_info[:ad_group_cost].to_f + tactual_price
 		#广告当前周期花费
-		redis_info[:ad_current_cost] = redis_info[:ad_current_cost].to_f + actual_price
+		redis_info[:ad_current_cost] = redis_info[:ad_current_cost].to_f + tactual_price
 		#广告总花费
-		redis_info[:ad_cost] = redis_info[:ad_cost].to_f + actual_price
+		redis_info[:ad_cost] = redis_info[:ad_cost].to_f + tactual_price
 		#更新广告花费
 		RtbRedis.expense_node.mapped_hmset(rtb_key, redis_info)
 
