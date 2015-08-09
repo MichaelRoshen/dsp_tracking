@@ -38,21 +38,22 @@ get '/api/ads' do
 		tactual_price = actual_price(options)
 		tactual_price = tactual_price.to_f / 1000
 		#账号花费
-		redis_info[:account_cost] = redis_info[:account_cost].to_f + tactual_price
+		redis_info[:account_cost] = (redis_info[:account_cost].to_f + tactual_price).round(2)
 		#广告组花费
-		redis_info[:ad_group_cost] = redis_info[:ad_group_cost].to_f + tactual_price
+		redis_info[:ad_group_cost] = (redis_info[:ad_group_cost].to_f + tactual_price).round(2)
 		#广告当前周期花费
-		redis_info[:ad_current_cost] = redis_info[:ad_current_cost].to_f + tactual_price
+		redis_info[:ad_current_cost] = (redis_info[:ad_current_cost].to_f + tactual_price).round(2)
 		#广告总花费
-		redis_info[:ad_cost] = redis_info[:ad_cost].to_f + tactual_price
+		redis_info[:ad_cost] = (redis_info[:ad_cost].to_f + tactual_price).round(2)
 		#更新广告花费
 		RtbRedis.expense_node.mapped_hmset(rtb_key, redis_info)
 
 		#实际花费＋固定出价 超出15分钟的预算，则从可投放数组种删除该条广告，并存入不可投递数组种，等待定时任务重新计算
-		if redis_info[:ad_current_cost].to_f + (redis_info[:delivery_price].to_f / 1000) > redis_info[:cycle_delivery_price].to_f
+		if (redis_info[:ad_current_cost].to_f + (redis_info[:delivery_price].to_f / 1000)) > redis_info[:cycle_delivery_price].to_f
 			#删除可投地数组中的id
 			budget_key = "budget_control"
 			RtbRedis.expense_node.srem(budget_key, params[:hqAdId].to_i)
+
 			#添加到不可投递数组中
 			no_budget_key = "no_budget_control"
 			RtbRedis.expense_node.sadd(no_budget_key, params[:hqAdId].to_i)
