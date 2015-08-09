@@ -32,59 +32,11 @@
 
    desc 'redis seed'
    task :redis_seed do 
-   	redis_info =
-	 [{"id"=>1, "budget_price"=>2880, "cycle_delivery_price"=>10, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>72, 
-	 	"delivery_price"=>4, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-10 00:00:00", "ad_group_budget_price"=>4000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>5000, "account_current_cost"=>0.0
-	 },{"id"=>2, "budget_price"=>2880, "cycle_delivery_price"=>20, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>36, 
-	 	"delivery_price"=>5, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-20 00:00:00", "ad_group_budget_price"=>45000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>55000, "account_current_cost"=>0.0
-	 },{"id"=>3, "budget_price"=>7200, "cycle_delivery_price"=>15, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>120, 
-	 	"delivery_price"=>4, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-10 00:00:00", "ad_group_budget_price"=>4000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>55000, "account_current_cost"=>0.0
-	 },{"id"=>4, "budget_price"=>28800, "cycle_delivery_price"=>30, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>240, 
-	 	"delivery_price"=>8, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-10 00:00:00", "ad_group_budget_price"=>45000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>55000, "account_current_cost"=>0.0
-	 },{"id"=>5, "budget_price"=>2400, "cycle_delivery_price"=>10, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>60, 
-	 	"delivery_price"=>4, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-10 00:00:00", "ad_group_budget_price"=>45000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>55000, "account_current_cost"=>0.0
-	 },{"id"=>6, "budget_price"=>69120, "cycle_delivery_price"=>24, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>720, 
-	 	"delivery_price"=>4, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-10 00:00:00", "ad_group_budget_price"=>45000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>55000, "account_current_cost"=>0.0
-	 },{"id"=>7, "budget_price"=>2880, "cycle_delivery_price"=>30, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>100, 
-	 	"delivery_price"=>10, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-10 00:00:00", "ad_group_budget_price"=>45000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>55000, "account_current_cost"=>0.0
-	 },{"id"=>8, "budget_price"=>86400, "cycle_delivery_price"=>60, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>360, 
-	 	"delivery_price"=>24, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-10 00:00:00", "ad_group_budget_price"=>45000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>55000, "account_current_cost"=>0.0
-	 },{"id"=>9, "budget_price"=>24000, "cycle_delivery_price"=>30, 
-	 	"ad_current_cost"=>0.0, "ad_cost"=>0.0, "delivery_time_limit"=>200, 
-	 	"delivery_price"=>8, "delivery_start_time"=>"2015-07-01 00:00:00", 
-	 	"delivery_end_time"=>"2015-07-10 00:00:00", "ad_group_budget_price"=>45000, 
-	 	"ad_group_current_cost"=>0.0, "account_buget_price"=>55000, "account_current_cost"=>0.0
-	 }] 
-	redis_info.each do |info|
-		rtb_key = "ad_#{info['id']}_delivery_strategy"
-		puts rtb_key
-		RtbRedis.expense_node.mapped_hmset(rtb_key, info)
-	end
-	RtbRedis.expense_node.sadd('budget_control',[1,2,3,4,5,6,7,8,9])
+	hash = {"id"=>"15", "budget_price"=>"120000", "cycle_delivery_price"=>"312", "ad_current_cost"=>"0.0", "ad_cost"=>"0.0", "delivery_time_limit"=>"96", "delivery_price"=>"600", "delivery_start_time"=>"1438790400", "delivery_end_time"=>"1439136000", "ad_group_budget_price"=>"120000", "ad_group_cost"=>"0.0", "account_buget_price"=>"200000", "account_cost"=>"0.0"}
+	rtb_key = "ad_15_delivery_strategy"
+	puts rtb_key
+	RtbRedis.expense_node.mapped_hmset(rtb_key, hash)
+	RtbRedis.expense_node.sadd('budget_control',[15])
    end
 end
 
