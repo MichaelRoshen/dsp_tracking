@@ -6,12 +6,12 @@ end
 
 get '/api/ads' do
 	options = params.symbolize_keys
-	if options[:hqSource].to_s == 'youku'
-		wp = options[:hqPrice].to_s
-		price = decode_aes_price(wp)
-		options = options.merge({:decodePrice => price})
-	elsif options[:hqSource].to_s == 'baidu_bc'
-	end
+	# if options[:hqSource].to_s == 'youku'
+	# 	wp = options[:hqPrice].to_s
+	# 	price = decode_aes_price(wp)
+	# 	options = options.merge({:decodePrice => price})
+	# elsif options[:hqSource].to_s == 'baidu_bc'
+	# end
 
 	if options[:hqEvent].to_s  == "1" #曝光
 		ShowTracking << options
@@ -35,7 +35,7 @@ get '/api/ads' do
 	    keys = ["id", "budget_price", "cycle_delivery_price", "ad_current_cost", "ad_cost", "delivery_time_limit", "delivery_price", "delivery_start_time", "delivery_end_time", "ad_group_budget_price", "ad_group_cost", "account_buget_price", "account_cost"]
 		redis_info =  RtbRedis.expense_node.mapped_hmget(rtb_key, *keys)
 		redis_info = redis_info.symbolize_keys
-		tactual_price = actual_price(options)
+		tactual_price = options[:hqPrice]
 		tactual_price = tactual_price.to_f / 1000
 		#账号花费
 		redis_info[:account_cost] = (redis_info[:account_cost].to_f + tactual_price).round(2)
@@ -67,13 +67,13 @@ end
 
 private
 
-def actual_price(options)
-	if options[:hqSource] == 'youku'
-		options[:decodePrice].to_i
-	else
-		options[:hqPrice].to_i
-	end
-end
+# def actual_price(options)
+# 	if options[:hqSource] == 'youku'
+# 		options[:decodePrice].to_i
+# 	else
+# 		options[:hqPrice].to_i
+# 	end
+# end
 
 
 def decode_aes_price(wp)
