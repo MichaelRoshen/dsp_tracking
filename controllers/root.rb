@@ -49,7 +49,8 @@ get '/api/ads' do
 		RtbRedis.expense_node.mapped_hmset(rtb_key, redis_info)
 
 		#实际花费＋固定出价 超出15分钟的预算，则从可投放数组种删除该条广告，并存入不可投递数组种，等待定时任务重新计算
-		if (redis_info[:ad_current_cost].to_f + (redis_info[:delivery_price].to_f / 1000)) > redis_info[:cycle_delivery_price].to_f
+		if (redis_info[:ad_current_cost].to_f + (redis_info[:delivery_price].to_f / 1000)) > redis_info[:cycle_delivery_price].to_f ||
+			Time.now + 15*60 > Time.at(redis_info[:delivery_end_time].to_i) 
 			#删除可投地数组中的id
 			budget_key = "budget_control"
 			RtbRedis.expense_node.srem(budget_key, params[:hqAdId].to_i)
