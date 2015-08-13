@@ -32,10 +32,10 @@
 
    desc 'redis seed'
    task :redis_seed do 
-   id = 13
+   id = ENV['id']
    start_date = Time.now.to_i
    end_date = (Time.now + 4*24*60*60).to_i
-	hash = {"id"=>id, "budget_price"=>"120000", "cycle_delivery_price"=>"312", "ad_current_cost"=>"0.0", "ad_cost"=>"0.0", "delivery_time_limit"=>"96", "delivery_price_bc"=>"600", "delivery_price_youku"=>"0", "delivery_start_time"=>"#{start_date}", "delivery_end_time"=>"#{end_date}", "ad_group_budget_price"=>"120000", "ad_group_cost"=>"0.0", "account_buget_price"=>"200000", "account_cost"=>"0.0"}
+	hash = {"id"=>id, "budget_price"=>"120000", "cycle_delivery_price"=>"312", "ad_current_cost"=>"0.0", "ad_cost"=>"0.0", "delivery_time_limit"=>"96", "delivery_price_bc"=>"600", "delivery_price_youku"=>"0.0", "delivery_start_time"=>"#{start_date}", "delivery_end_time"=>"#{end_date}", "ad_group_budget_price"=>"120000", "ad_group_cost"=>"0.0", "account_buget_price"=>"200000", "account_cost"=>"0.0"}
 	rtb_key = "ad_#{id}_delivery_strategy"
 	puts rtb_key
 	RtbRedis.expense_node.mapped_hmset(rtb_key, hash)
